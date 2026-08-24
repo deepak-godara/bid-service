@@ -1,0 +1,51 @@
+spring:
+    application:
+        name: bid-service
+
+    threads:
+        virtual:
+            enabled: true
+
+    datasource:
+        url: jdbc:postgresql://localhost:5432/bid_service
+        username: postgres
+        password: postgres
+        driver-class-name: org.postgresql.Driver
+
+    jpa:
+        hibernate:
+            ddl-auto: update
+        show-sql: true
+        properties:
+            hibernate:
+                '[format_sql]': true
+                dialect: org.hibernate.dialect.PostgreSQLDialect
+
+    kafka:
+        bootstrap-servers: localhost:9092
+        producer:
+            key-serializer: org.apache.kafka.common.serialization.StringSerializer
+            value-serializer: org.apache.kafka.common.serialization.StringSerializer
+
+    data:
+        redis:
+            host: localhost
+            port: 6379
+            lettuce:
+                pool:
+                    max-active: 50
+                    max-idle: 20
+                    min-idle: 5
+
+server:
+    servlet:
+        context-path: /api/v1
+    port: 8084
+
+jwt:
+    secretKey: 243567575revfvfvgrvvenveivrfhuhruvbnrevienvv
+
+auction:
+    stream:
+        worker:
+            block-duration-ms: 2000
